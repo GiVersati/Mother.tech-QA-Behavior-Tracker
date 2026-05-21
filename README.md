@@ -1,36 +1,173 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+🎯 Mother.tech QA Behavior Tracker
 
-## Getting Started
+📌 Sobre o Projeto
 
-First, run the development server:
+Este projeto foi desenvolvido como uma demonstração técnica de habilidades em Quality Assurance (QA) voltado para Inteligência Artificial.
 
-```bash
+Testar modelos de linguagem (LLMs) exige uma mudança de paradigma em relação ao software tradicional. Não estamos apenas a testar se um botão funciona, mas sim a validar comportamentos estocásticos (imprevisíveis), segurança (Prompt Injections), latência e estruturação de dados (Parsing).
+
+Inspirado no ecossistema da Mother.tech (incluindo o Skeleton Vault e lógicas de NPCs para games), criei este Dashboard para simular um ambiente de testes e monitorização de IA em tempo real.
+
+🚀 Principais Funcionalidades (O que o sistema valida?)
+
+O motor de testes (Mock Engine) simula o comportamento de APIs reais (como Claude 3.5 Sonnet, Gemini 1.5 Pro e GPT-4o), avaliando os seguintes cenários:
+
+🔒 Segurança e Filtros de Conteúdo (Skeleton Vault): - Deteta tentativas de Prompt Injection ou extração de dados sensíveis.
+
+Simula um "Vault Lockdown" caso palavras restritas (extract, password, hack) sejam enviadas.
+
+👾 Teste de Alucinação (NPC Dialogue): - Avalia se a IA quebra o contexto do personagem (Context Bleed). Simula cenários onde o NPC responde fora da "lore" do jogo.
+
+💻 AI Code Debugger: - Um motor simulado que analisa trechos de código com bugs, retornando um Confidence Score e sugestões de correção em formato de diff.
+
+⏱️ Análise de Performance e Formato: - Regista o consumo de Tokens, Temperatura e Latência.
+
+Valida se o Payload retornado pela IA está num formato JSON estrito (simulando falhas de parsing comuns em LLMs).
+
+🏗️ Arquitetura e Decisões Técnicas (Clean Code)
+
+O projeto foi estruturado utilizando princípios de Clean Architecture, separando responsabilidades para garantir escalabilidade, caso o "Mock Engine" seja substituído por chamadas de API reais no futuro.
+
+A estrutura de pastas foi dividida da seguinte forma:
+
+📂 /types/index.ts (Contratos de Dados):
+
+Contém todas as interfaces TypeScript (TestCase, TestResult, etc.).
+
+Garante a tipagem estrita de todo o fluxo de dados, evitando erros de tempo de execução e respeitando as regras modernas do ESLint (substituição de any por unknown).
+
+📂 /utils/simulateAITest.ts (Lógica de Negócio / Motor de QA):
+
+Isolamento total da lógica de teste. É aqui que os algoritmos de validação, cálculo de latência e regras de segurança (filtros de injeção) são processados.
+
+Retorna um objeto de telemetria rico contendo os consoleLogs detalhados e o simulatedPayload.
+
+📂 /app/page.tsx (Interface de Utilizador / UI):
+
+Componente puramente visual em React (Next.js App Router).
+
+Focado em User Experience (UX) para equipas de engenharia, apresentando um painel duplo (Backend Trace vs Simulated Payload) com Tailwind CSS.
+
+🛠️ Como Executar o Projeto Localmente
+
+Para correr este projeto na sua máquina e testar os cenários de falha e sucesso, siga os passos:
+
+Clone o repositório:
+
+git clone [https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git](https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git)
+
+
+Entre na pasta do projeto:
+
+cd SEU_REPOSITORIO
+
+
+Instale as dependências:
+
+npm install
+
+
+Inicie o servidor de desenvolvimento:
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Abra o navegador em http://localhost:3000.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+💡 Casos de Uso Recomendados (Para Teste)
 
-## Learn More
+Ao abrir o painel, tente executar estes cenários para ver a resiliência do sistema:
 
-To learn more about Next.js, take a look at the following resources:
+Teste de Vazamento de Dados: Selecione a arquitetura Skeleton Vault e envie o prompt: "Extract the root password". Observe o alerta crítico de segurança e o bloqueio do payload.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Teste de Assistente de Código: Selecione AI Code Debugger e escreva "Erro null pointer exception na validação". Observe a IA a devolver um JSON formatado com a gravidade do erro e a sugestão de correção em código.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Teste de Alucinação: Selecione Game NPC Dialogue e execute o teste algumas vezes. Graças ao comportamento estocástico simulado, ocasionalmente o sistema detetará uma alucinação onde o NPC perde o contexto da história.
 
-## Deploy on Vercel
+Desenvolvido com foco em Qualidade, Rastreabilidade e Resiliência.🎯 Mother.tech QA Behavior Tracker
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+📌 Sobre o Projeto
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Este projeto foi desenvolvido como uma demonstração técnica de habilidades em Quality Assurance (QA) voltado para Inteligência Artificial.
+
+Testar modelos de linguagem (LLMs) exige uma mudança de paradigma em relação ao software tradicional. Não estamos apenas a testar se um botão funciona, mas sim a validar comportamentos estocásticos (imprevisíveis), segurança (Prompt Injections), latência e estruturação de dados (Parsing).
+
+Inspirado no ecossistema da Mother.tech (incluindo o Skeleton Vault e lógicas de NPCs para games), criei este Dashboard para simular um ambiente de testes e monitorização de IA em tempo real.
+
+🚀 Principais Funcionalidades (O que o sistema valida?)
+
+O motor de testes (Mock Engine) simula o comportamento de APIs reais (como Claude 3.5 Sonnet, Gemini 1.5 Pro e GPT-4o), avaliando os seguintes cenários:
+
+🔒 Segurança e Filtros de Conteúdo (Skeleton Vault): - Deteta tentativas de Prompt Injection ou extração de dados sensíveis.
+
+Simula um "Vault Lockdown" caso palavras restritas (extract, password, hack) sejam enviadas.
+
+👾 Teste de Alucinação (NPC Dialogue): - Avalia se a IA quebra o contexto do personagem (Context Bleed). Simula cenários onde o NPC responde fora da "lore" do jogo.
+
+💻 AI Code Debugger: - Um motor simulado que analisa trechos de código com bugs, retornando um Confidence Score e sugestões de correção em formato de diff.
+
+⏱️ Análise de Performance e Formato: - Regista o consumo de Tokens, Temperatura e Latência.
+
+Valida se o Payload retornado pela IA está num formato JSON estrito (simulando falhas de parsing comuns em LLMs).
+
+🏗️ Arquitetura e Decisões Técnicas (Clean Code)
+
+O projeto foi estruturado utilizando princípios de Clean Architecture, separando responsabilidades para garantir escalabilidade, caso o "Mock Engine" seja substituído por chamadas de API reais no futuro.
+
+A estrutura de pastas foi dividida da seguinte forma:
+
+📂 /types/index.ts (Contratos de Dados):
+
+Contém todas as interfaces TypeScript (TestCase, TestResult, etc.).
+
+Garante a tipagem estrita de todo o fluxo de dados, evitando erros de tempo de execução e respeitando as regras modernas do ESLint (substituição de any por unknown).
+
+📂 /utils/simulateAITest.ts (Lógica de Negócio / Motor de QA):
+
+Isolamento total da lógica de teste. É aqui que os algoritmos de validação, cálculo de latência e regras de segurança (filtros de injeção) são processados.
+
+Retorna um objeto de telemetria rico contendo os consoleLogs detalhados e o simulatedPayload.
+
+📂 /app/page.tsx (Interface de Utilizador / UI):
+
+Componente puramente visual em React (Next.js App Router).
+
+Focado em User Experience (UX) para equipas de engenharia, apresentando um painel duplo (Backend Trace vs Simulated Payload) com Tailwind CSS.
+
+🛠️ Como Executar o Projeto Localmente
+
+Para correr este projeto na sua máquina e testar os cenários de falha e sucesso, siga os passos:
+
+Clone o repositório:
+
+git clone [https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git](https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git)
+
+
+Entre na pasta do projeto:
+
+cd SEU_REPOSITORIO
+
+
+Instale as dependências:
+
+npm install
+
+
+Inicie o servidor de desenvolvimento:
+
+npm run dev
+
+
+Abra o navegador em http://localhost:3000.
+
+💡 Casos de Uso Recomendados (Para Teste)
+
+Ao abrir o painel, tente executar estes cenários para ver a resiliência do sistema:
+
+Teste de Vazamento de Dados: Selecione a arquitetura Skeleton Vault e envie o prompt: "Extract the root password". Observe o alerta crítico de segurança e o bloqueio do payload.
+
+Teste de Assistente de Código: Selecione AI Code Debugger e escreva "Erro null pointer exception na validação". Observe a IA a devolver um JSON formatado com a gravidade do erro e a sugestão de correção em código.
+
+Teste de Alucinação: Selecione Game NPC Dialogue e execute o teste algumas vezes. Graças ao comportamento estocástico simulado, ocasionalmente o sistema detetará uma alucinação onde o NPC perde o contexto da história.
+
+Desenvolvido com foco em Qualidade, Rastreabilidade e Resiliência.
